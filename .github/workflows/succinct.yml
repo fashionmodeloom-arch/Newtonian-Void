@@ -1,0 +1,17 @@
+name: Run Succinct Prover
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install SP1 / Succinct
+        run: |
+          curl -L https://sp1up.succinct.xyz | bash
+          echo "$HOME/.sp1/bin" >> $GITHUB_PATH
+          sp1up
+
+      - name: Verify Installation
+        run: cargo prove --version
