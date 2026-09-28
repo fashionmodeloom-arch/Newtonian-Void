@@ -11,7 +11,11 @@ jobs:
         run: |
           curl -L https://sp1up.succinct.xyz | bash
           echo "$HOME/.sp1/bin" >> $GITHUB_PATH
+          # تحديث متغيرات المسار مؤقتاً لهذه الخطوة
+          export PATH="$HOME/.sp1/bin:$PATH"
           sp1up
 
       - name: Verify Installation
-        run: cargo prove --version
+        run: |
+          export PATH="$HOME/.sp1/bin:$PATH"
+          cargo prove --version
